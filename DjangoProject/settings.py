@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+from DjangoProject.util.util_env import env_manager
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -74,8 +75,13 @@ WSGI_APPLICATION = "DjangoProject.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.postgresql",
+        "HOST": env_manager.get("DATABASE_HOST"),
+        "PORT": env_manager.get("DATABASE_PORT"),
+        "NAME": env_manager.get("DATABASE_NAME"),
+        "USER": env_manager.get("DATABASE_USER"),
+        "PASSWORD": env_manager.get("DATABASE_PASSWORD"),
+        "OPTIONS": {},
     }
 }
 
