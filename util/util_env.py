@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 
 class EnvironmentManager:
     def __init__(self):
-        load_dotenv(dotenv_path=Path(__file__).resolve().parent.parent.parent / ".env")
+        load_dotenv(dotenv_path=Path(__file__).resolve().parent.parent / ".env")
         self._environment_variables = {}
         self._set_os_env()
         self.postgres = None
