@@ -1,5 +1,6 @@
 from django.apps import AppConfig
 
+
 # Django에서 apps.py의 역할:
 #
 # AppConfig의 핵심 기능:

@@ -3,6 +3,7 @@ from pathlib import Path
 
 from dotenv import load_dotenv
 
+
 class EnvironmentManager:
     def __init__(self):
         load_dotenv(dotenv_path=Path(__file__).resolve().parent.parent / ".env")

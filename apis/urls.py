@@ -1,8 +1,9 @@
-from django.urls import path, include
+from django.urls import include, path
 from rest_framework import routers
 
 from apis.common_views import ping
 from apis.views.accounts_organization_views import AccountsOrganizationViewSet
+
 
 router = routers.SimpleRouter()
 

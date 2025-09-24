@@ -1,9 +1,5 @@
-from typing import TYPE_CHECKING, Optional
-
-from docutils.nodes import organization
-
 from domains.accounts.models import Organization
-from domains.commons.BaseService import BaseService
+from domains.commons.base_service import BaseService
 
 
 class AccountsOrganizationService(BaseService):

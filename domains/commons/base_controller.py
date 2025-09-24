@@ -1,7 +1,8 @@
-from typing import TYPE_CHECKING, Optional
 from django.db import models
-from domains.commons.BaseService import BaseService
 from django.db.models import QuerySet
+
+from domains.commons.base_service import BaseService
+
 
 class BaseController:
     class Meta:
@@ -12,6 +13,8 @@ class BaseController:
     def get_all(self, *args, **kwargs) -> QuerySet[models.Model]:
         return self.service_class().get_all(*args, **kwargs)
 
+    def get(self, pk: int, *args, **kwargs) -> models.Model | None:
+        return self.service_class().get(pk, *args, **kwargs)
 
-    def get(self, pk: int, *args, **kwargs) -> Optional[models.Model]:
-        return self.service_class().get(pk=pk, *args, **kwargs)
+    def create(self, validated_data: dict) -> models.Model:
+        return self.service_class().create(validated_data)

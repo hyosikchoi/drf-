@@ -1,1 +1,1 @@
-from .accounts_organization_model import Organization
+from .accounts_organization_model import *
