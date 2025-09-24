@@ -18,3 +18,6 @@ class BaseController:
 
     def create(self, validated_data: dict) -> models.Model:
         return self.service_class().create(validated_data)
+
+    def update(self, pk: int, validated_data: dict) -> models.Model:
+        return self.service_class().update(pk,validated_data)

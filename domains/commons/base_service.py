@@ -1,5 +1,6 @@
 from django.db import models
 from django.db.models import QuerySet
+from rest_framework.exceptions import ValidationError
 from rest_framework.utils import model_meta
 
 
@@ -36,3 +37,14 @@ class BaseService:
                     many_to_many_value
                 )  # set 메서드를 통해 매핑 테이블에 many_to_many_value 갯수 만큼 row 를 insert 시킨다.
         return row
+
+    def update(self, pk: int, validated_data: dict) -> models.Model:
+        try:
+            queryset = self._get_queryset().filter(pk=pk)
+            data = validated_data.copy()
+            queryset.update(**data)
+            return queryset.first()
+        except ValueError as e:
+            raise ValidationError(e)
+        except self.Meta.model.DoesNotExist:
+            raise self.Meta.model.DoesNotExist()
