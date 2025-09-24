@@ -14,9 +14,4 @@ class AccountsOrganizationController(BaseController):
     service_class: AccountsOrganizationService = AccountsOrganizationService
 
 
-    def get_all_organizations(self, *args, **kwargs) -> list[models.Model]:
-        organizations = self.get_all(*args, **kwargs).all()
-        return list(organizations)
 
-    def get_by_id(self, pk: int, *args, **kwargs) -> Optional[models.Model]:
-        return self.get(pk=pk, *args, **kwargs)
