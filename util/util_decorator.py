@@ -9,7 +9,7 @@ from rest_framework.serializers import Serializer
 from rest_framework.viewsets import GenericViewSet
 
 
-def normalize(
+def normalize_view(
     req_serializer_class: type[Serializer] = None,
     res_serializer_class: type[Serializer] = None,
     many: bool = False,
@@ -27,7 +27,7 @@ def normalize(
 
             if page:
                 return _get_paginated_response(view, result)
-            return _get_response(view, result)
+            return _get_response(result)
 
         def _get_validated_data(request: Request) -> dict:
             validated_data = {}
@@ -50,7 +50,7 @@ def normalize(
             if result is not None and isinstance(result, Response):
                 return result
             if res_serializer_class:
-                return Response(res_serializer_class(result, many=many, status= status.HTTP_200_OK).data)
-            return Response(result, status=status.HTTP_200_OK)
+                return Response(res_serializer_class(result, many=many).data)
+            return Response(result)
         return wrapper
     return request_wrapper
