@@ -1,5 +1,6 @@
 from django.db import models
 from django.db.models import QuerySet
+from django.http import Http404
 from rest_framework.exceptions import ValidationError
 from rest_framework.utils import model_meta
 
@@ -17,7 +18,7 @@ class BaseService:
     def get(self, pk: int, *args, **kwargs) -> models.Model | None:
         instance = self._get_queryset(*args, **kwargs).filter(pk=pk).first()
         if not instance:
-            raise self.Meta.model.DoesNotExist()
+            raise Http404(f"{self.Meta.model.__name__} does not exist")
         return instance
 
     def create(self, validated_data: dict) -> models.Model:
@@ -48,4 +49,10 @@ class BaseService:
         except ValueError as e:
             raise ValidationError(e)
         except self.Meta.model.DoesNotExist:
-            raise self.Meta.model.DoesNotExist()
+            raise Http404(f"{self.Meta.model.__name__} does not exist")
+
+    def delete(self, pk: int, *args, **kwargs):
+        instance = self._get_queryset(*args, **kwargs).filter(pk=pk).first()
+        if not instance:
+            raise Http404(f"{self.Meta.model.__name__} does not exist")
+        instance.delete()

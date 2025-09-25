@@ -21,3 +21,6 @@ class BaseController:
 
     def update(self, pk: int, validated_data: dict) -> models.Model:
         return self.service_class().update(pk,validated_data)
+
+    def delete(self, pk: int, *args, **kwargs):
+        return self.service_class().delete(pk, *args, **kwargs)

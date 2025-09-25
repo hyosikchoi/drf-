@@ -33,3 +33,8 @@ class AccountsOrganizationViewSet(BaseViewSet):
     @normalize_view(req_serializer_class=None, res_serializer_class=AccountsOrganizationResSerializer)
     def update(self, validated_data: dict, request: Request, pk: int, *args, **kwargs) -> Response:
         return self.controller_class().update(pk, request.data)
+
+    @normalize_view(req_serializer_class=None, res_serializer_class=None)
+    def destroy(self, validated_data: dict, request: Request, pk: int, *args, **kwargs) -> str:
+        self.controller_class().delete(pk)
+        return "SUCCESS"
