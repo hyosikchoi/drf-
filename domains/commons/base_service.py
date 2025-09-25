@@ -40,10 +40,11 @@ class BaseService:
 
     def update(self, pk: int, validated_data: dict) -> models.Model:
         try:
-            queryset = self._get_queryset().filter(pk=pk)
-            data = validated_data.copy()
-            queryset.update(**data)
-            return queryset.first()
+            instance = self.get(pk)
+            for key, value in validated_data.items():
+                setattr(instance, key, value)
+            instance.save()
+            return instance
         except ValueError as e:
             raise ValidationError(e)
         except self.Meta.model.DoesNotExist:

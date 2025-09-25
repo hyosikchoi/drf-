@@ -30,7 +30,6 @@ class AccountsOrganizationViewSet(BaseViewSet):
     def create(self, validated_data: dict, request: Request, *args, **kwargs) -> Response:
         return self.controller_class().create(validated_data)
 
-    # TODO updated_at 도 수정해야함.
     @normalize_view(req_serializer_class=None, res_serializer_class=AccountsOrganizationResSerializer)
     def update(self, validated_data: dict, request: Request, pk: int, *args, **kwargs) -> Response:
         return self.controller_class().update(pk, request.data)

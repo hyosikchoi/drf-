@@ -9,7 +9,7 @@ class Organization(models.Model):
         verbose_name = _("기관")
 
     created_at = models.DateTimeField(
-        auto_now_add=True,  # auto_now_add: 한 번만 설정 (불변), auto_now: 매번 갱신 (가변)
+        auto_now_add=True,  # auto_now_add: 한 번만 설정 (불변), auto_now: 매번 갱신 (가변) , 주의: 대신 둘 다 save() 호출시 적용!!
         null=True,
         blank=True,
         help_text=_("생성 일자"),
