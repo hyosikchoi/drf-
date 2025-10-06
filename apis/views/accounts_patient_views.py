@@ -13,7 +13,7 @@ class AccountsPatientViewSet(BaseViewSet):
     controller_class = AccountsPatientController
     queryset = Patient.objects
 
-    @normalize_view(req_serializer_class=None, res_serializer_class=AccountsPatientResSerializer, many=True)
+    @normalize_view(req_serializer_class=None, res_serializer_class=AccountsPatientResSerializer, page=True)
     def list(self, validated_data: dict, request: Request, *args, **kwargs) -> Response:
         return self.controller_class().get_all()
 

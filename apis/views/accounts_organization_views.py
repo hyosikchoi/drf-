@@ -16,7 +16,7 @@ class AccountsOrganizationViewSet(BaseViewSet):
     controller_class = AccountsOrganizationController
     queryset = Organization.objects
 
-    @normalize_view(req_serializer_class=None, res_serializer_class=AccountsOrganizationResSerializer, many=True)
+    @normalize_view(req_serializer_class=None, res_serializer_class=AccountsOrganizationResSerializer, page=True)
     def list(self, validated_data: dict, request: Request, *args, **kwargs) -> Response:
         return self.controller_class().get_all()
 
