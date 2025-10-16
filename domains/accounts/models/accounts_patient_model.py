@@ -16,5 +16,6 @@ class Patient(models.Model):
         null=False, blank=False, default=uuid.uuid4(), unique=True, editable=False, help_text=_("환자 uuid")
     )
     description = models.TextField(help_text=_("환자 설명"))
-    user_id = models.BigIntegerField(null=True, blank=True, help_text=_("의사 아이디"))
+    # TODO user 생성 만들어야함. 지금은 default = 1
+    user_id = models.BigIntegerField(null=True, blank=True, help_text=_("의사 아이디"), default=1)
     is_deleted = models.BooleanField(default=False, help_text=_("삭제 여부"))

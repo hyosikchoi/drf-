@@ -2,6 +2,11 @@ from django.utils.translation import gettext_lazy as _
 from rest_framework import serializers
 
 
+class AccountsPatientReqSerializer(serializers.Serializer):
+    chart_number = serializers.CharField(help_text=_("차트 번호"))
+    description = serializers.CharField(help_text=_("메모"), allow_blank=True)
+
+
 class AccountsPatientResSerializer(serializers.Serializer):
     created_at = serializers.DateTimeField(help_text=_("생성 일자"))
     updated_at = serializers.DateTimeField(help_text=_("수정 일자"))

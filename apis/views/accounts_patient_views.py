@@ -2,7 +2,7 @@ from rest_framework.request import Request
 from rest_framework.response import Response
 
 from apis.controllers.accounts_patient_controller import AccountsPatientController
-from apis.serializers.accounts_patient_serializers import AccountsPatientResSerializer
+from apis.serializers.accounts_patient_serializers import AccountsPatientResSerializer, AccountsPatientReqSerializer
 from domains.accounts.models import Patient
 from domains.commons.base_view_set import BaseViewSet
 from util.util_decorator import normalize_view
@@ -21,9 +21,9 @@ class AccountsPatientViewSet(BaseViewSet):
     def retrieve(self, validated_data: dict, request: Request, pk: int, *args, **kwargs) -> Response:
         return self.controller_class().get(pk=pk)
 
-    @normalize_view(req_serializer_class=None, res_serializer_class=AccountsPatientResSerializer)
+    @normalize_view(req_serializer_class=AccountsPatientReqSerializer, res_serializer_class=AccountsPatientResSerializer)
     def create(self, validated_data: dict, request: Request, *args, **kwargs) -> Response:
-        return self.controller_class().create(validated_data)
+        return self.controller_class().create_patient(validated_data)
 
     @normalize_view(req_serializer_class=None, res_serializer_class=AccountsPatientResSerializer)
     def update(self, validated_data: dict, request: Request, pk: int, *args, **kwargs) -> Response:
